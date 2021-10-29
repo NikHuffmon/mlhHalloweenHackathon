@@ -20,6 +20,7 @@ candy_Frame.pack()
 candy_name_label = tk.Label(candy_Frame, text='', font = 'Times 12')
 candy_name_label.grid(column=1,row =0)
 #nutrition area
+#nutrition_label=tk.Label(candy_Frame)
 
 #frame for the list
 
