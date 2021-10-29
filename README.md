@@ -1,3 +1,0 @@
-# halloweenTryTwo
-hi
-hello
