@@ -5,7 +5,10 @@ win.geometry('450x400')
 win.configure(background='#e86c3f')
 
 #function for the button picture
-#
+
+#adding photos of candy
+
+
 candylist = []
 index = 0
 
