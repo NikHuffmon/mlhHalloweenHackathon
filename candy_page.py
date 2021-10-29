@@ -10,6 +10,7 @@ win.configure(background='#e86c3f')
 #candycorn_Photo = tk.PhotoImage(files = '')
 #twix_Photo = tk.PhotoImage(files = '')
 #mily_way_Photo = tk.PhotoImage(files = '')
+#crunch_Photo = tk.PhotoImage(files = '')
 candylist = []
 index = 0
 
