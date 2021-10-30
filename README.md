@@ -1,4 +1,5 @@
-Added test account several differnet times.
-Nik = Poob
+Building a Candy picker and information provider
 
-Hopefully changed the email and username
+MLH Hackathon
+
+Date: October 29th - October 31st
