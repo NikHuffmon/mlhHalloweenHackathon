@@ -20,8 +20,8 @@ index = 0
 #candyText = 'Please enter in a type of candy'
 candy = tk.StringVar()
 candy.set('Please enter in a type of candy')
+candies_list = ['Sugary','Sweet','Chocolate']
 
-billy = True
 '''
 while true:
     candy.set(candyText)
@@ -40,11 +40,13 @@ def updateScreen():
         output_label.configure(text=" Add Candy ")
 
 
-def addReminder():
+def addReminder():         
     addInput = candy.get()
     candyList.append(addInput)
     new_candy_entry.delete(0,'end')
     new_candy_entry.insert(0,'Please enter in another candy type')
+    win.focus()
+   
    # print(new_candy_entry.get())
     #global candyList
     #global index
@@ -208,7 +210,7 @@ sweet_label.pack()
 
 chocolate_label = tk.Label(list_of_candies,text='',background='#e86c3f',font='Georgia 14')
 chocolate_label.pack()
-candies_list = ['Sugary','Sweet','Chocolate']
+
 
 f= True
 
@@ -224,6 +226,7 @@ while f:
            sugar_label.configure(text=i)
            f= False
            print(i)
+    
 
 
 #Creating Menu Bar
