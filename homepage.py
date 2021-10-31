@@ -41,19 +41,28 @@ def updateScreen():
 addInput = candy.get()
 candyTypes = ['Chocolate','Sugary','Sweet','chocolate','sugary','sweet']
 def addReminder():
-    print(new_candy_entry)
+    print(candy.get())
     for i in candyTypes:
-        if i != new_candy_entry:
+        print(candyTypes)
+        print(i)
+        Poob = 0
+        if i == candy.get():
+            Poob = 1
+            print('happy')         
+            addInput = candy.get()
+            candyList.append(addInput)
+            
+            new_candy_entry.delete(0,'end')
+            new_candy_entry.insert(0,'Please enter in another candy type')
+            win.focus()
+        if i == candyTypes[5] and i != candy.get() and i != candy.get() and Poob != 1:
             messagebox.showerror('Please enter in a valid choice of candy from the choices on the right')
-            break
-    else:         
-        addInput = candy.get()
-        candyList.append(addInput)
-        
-        new_candy_entry.delete(0,'end')
-        new_candy_entry.insert(0,'Please enter in another candy type')
-        win.focus()
-   
+            new_candy_entry.delete(0,'end')
+            new_candy_entry.insert(0,'Please enter in another candy type')  
+            win.focus()
+      #  elif i !=candy.get():
+          #  print('sad')
+
    # print(new_candy_entry.get())
     #global candyList
     #global index
@@ -171,7 +180,7 @@ def test():
     for i in candyList:
         candyListItems = i
         print(candyListItems)
-        interestLabel.configure(text='We see you are interested in'+candyListItems)
+        interestLabel.configure(text='We see you are interested in '+candyListItems)
      
 requestLabel = tk.Label(candy_information_frame,text='Please chose from the choices below to see the nutriental value and images of a similar type of candy to your generic choice chosen')
 requestLabel.pack()
