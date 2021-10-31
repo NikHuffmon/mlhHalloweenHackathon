@@ -38,14 +38,21 @@ def updateScreen():
         number_label.configure(text=index + 1)
     else:
         output_label.configure(text=" Add Candy ")
-
-
-def addReminder():         
-    addInput = candy.get()
-    candyList.append(addInput)
-    new_candy_entry.delete(0,'end')
-    new_candy_entry.insert(0,'Please enter in another candy type')
-    win.focus()
+addInput = candy.get()
+candyTypes = ['Chocolate','Sugary','Sweet','chocolate','sugary','sweet']
+def addReminder():
+    print(new_candy_entry)
+    for i in candyTypes:
+        if i != new_candy_entry:
+            messagebox.showerror('Please enter in a valid choice of candy from the choices on the right')
+            break
+    else:         
+        addInput = candy.get()
+        candyList.append(addInput)
+        
+        new_candy_entry.delete(0,'end')
+        new_candy_entry.insert(0,'Please enter in another candy type')
+        win.focus()
    
    # print(new_candy_entry.get())
     #global candyList
@@ -89,12 +96,14 @@ def clear():
     number_label.configure(text="")
     win.focus()
     number_label.config(text='0')
+    output_label.configure(text=" Add Candy ")
     #testVar.set(candyText)
     if candy == candy.get():
         print('hello')
     if candy.get() != 'Please enter in another candy type':
         new_candy_entry.delete(0,'end')
         new_candy_entry.insert(0,'Please enter in another candy type')
+        
    # if new_candy_entry.get() != 'Please enter in another candy type':
     #    new_candy_entry.insert(0,'Please enter in another candy type')
 
@@ -117,7 +126,6 @@ def setTextInput(text):
     updateScreen()
 
 def click(event):
-    print('hello')
     new_candy_entry.configure(state=NORMAL)
     new_candy_entry.delete(0,'end')
 
@@ -138,50 +146,86 @@ def provideInfo():
     messagebox.showinfo('Information','Please enter in a type of candy shown from the list to the right. Then click add. \n\n Once complete click the add button. \n\n If you have multiple different candies to add, please enter in another piece of candy and click add again. \n\n If you would like to see all the candies you have entered, please click on the arrow boxes and you will be shown with all the differnet candies you have entered.')
 
 def createNewWindow():
-    mainFrame.grid_forget()
-    candy_information_frame.pack()
+    if candyList == []:
+        messagebox.showerror('Please enter in a type of candy')
+    else:
+        mainFrame.grid_forget()
+        candy_information_frame.pack()
+        test()
 
   
 # -------------------------------------------------------------------->
 # Chase's information/code
 #function for the button picture
-
 candy_information_frame = tk.Frame(win)
 candy_information_frame.grid_forget()
-def corn():
-    candy_name_label.configure(text='candy corn')
-    #candy_photo_label.configure(image = 'candycorn_Photo')
-    #nutrition_label.configure(image = 'candycorn_nut_Photo')
 
-def twix():
-    candy_name_label.configure(text='twix')
-    #nutrition_label.configure(image = 'twix_nut_Photo')
-     #candy_photo_label.configure(image = 'twix_Photo')
-
-
-def milky_way():
-    candy_name_label.configure(text='Milky way')
-    #nutrition_label.configure(image = 'milky_way_nut_Photo')
-     #candy_photo_label.configure(image = 'milky_way_Photo')
-
-def crunch():
-    candy_name_label.configure(text='crunch')
-    #nutrition_label.configure(image = 'crunch_nut_Photo)
-    #candy_photo_label.configure(image = 'crunch_Photo)
-
-
-#adding photos of candy
-#candycorn_Photo = tk.PhotoImage(files = '')
-#twix_Photo = tk.PhotoImage(files = '')
-#mily_way_Photo = tk.PhotoImage(files = '')
-#crunch_Photo = tk.PhotoImage(files = '')\
-
+candyEntryLabel = tk.Label(candy_information_frame,text='Please select a candy from the choices below',font = 'Georgia 14',background='#e86c3f')
+candyEntryLabel.pack()
+candyListItems = ''
+interestLabel = tk.Label(candy_information_frame,text='')
+interestLabel.pack()
+def test():
+    global candyListItems
+    print('hello')
+    for i in candyList:
+        candyListItems = i
+        print(candyListItems)
+        interestLabel.configure(text='We see you are interested in'+candyListItems)
+     
+requestLabel = tk.Label(candy_information_frame,text='Please chose from the choices below to see the nutriental value and images of a similar type of candy to your generic choice chosen')
+requestLabel.pack()
 
 candy_Frame = tk.Frame(candy_information_frame, background = '#e86c3f')
 candy_Frame.pack()
 
 candy_name_label = tk.Label(candy_Frame, text='', font = 'Times 12')
 candy_name_label.grid(column=1,row =0)
+
+radioFrame = tk.Frame(candy_information_frame)
+radioFrame.pack()
+
+radVar = tk.IntVar()
+
+candyCorn = tk.Radiobutton(radioFrame,variable=radVar, text='Chocolate',background='#e86c3f',value=1)
+candyCorn.pack()
+
+#Chocolate
+twix = tk.Radiobutton(radioFrame,variable=radVar,text='Twix',background='#e86c3f',value=2)
+twix.pack()
+
+milkyWay = tk.Radiobutton(radioFrame,variable=radVar,text='Milk Way',background='#e86c3f',value=3)
+milkyWay.pack()
+
+crunch = tk.Radiobutton(radioFrame,variable=radVar,text='Crunch',background='#e86c3f',value=4)
+crunch.pack()
+
+#Photo Frame
+candyPhoto = tk.Frame(candy_information_frame)
+candyPhoto.pack()
+
+#adding photos of candy
+candycorn_Photo = tk.PhotoImage(file = 'candyCorn.png')
+twix_Photo = tk.PhotoImage(file = 'twix.png')
+milky_way_Photo = tk.PhotoImage(file = 'milkyWay.png')
+crunch_Photo = tk.PhotoImage(file = 'crunch.png')
+jelly_Photo = tk.PhotoImage(file='jellyBeans.png')
+
+candyCornPhoto = tk.Label(candyPhoto,image=candycorn_Photo,width=200,height=200)
+candyCornPhoto.pack_forget()
+
+twixPhoto = tk.Label(candyPhoto,image=twix_Photo,width=800,height=400)
+candyCornPhoto.pack_forget()
+
+milkWayPhoto = tk.Label(candyPhoto,image=milky_way_Photo,width=800,height=400)
+milkWayPhoto.pack_forget()
+
+crunchPhoto = tk.Label(candyPhoto,image=crunch_Photo,width=800,height=400)
+crunchPhoto.pack_forget()
+
+jellyPhoto = tk.Label(candyPhoto,image=jelly_Photo,width=200,height=400)
+jellyPhoto.pack_forget()
+
 #nutrition area
 #nutrition photo
 #twix_nut_Photo = tk.PhotoImage(files = '')
