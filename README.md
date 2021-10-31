@@ -1,4 +1,4 @@
-Building a Candy picker and information provider
+Building a candy picker and information provider
 
 MLH Hackathon
 

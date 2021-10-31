@@ -4,6 +4,8 @@ from tkinter import *
 import time
 import random
 from tkinter import messagebox
+#from PIL import Image as PIL_image, ImageTk as PIL_imagetk
+#from PIL import Image
 
 win = tk.Tk()
 
@@ -40,14 +42,16 @@ def updateScreen():
         output_label.configure(text=" Add Candy ")
 addInput = candy.get()
 candyTypes = ['Chocolate','Sugary','Sweet','chocolate','sugary','sweet']
+
+
 def addReminder():
+    Poob = 0 
     print(candy.get())
     for i in candyTypes:
         print(candyTypes)
         print(i)
-        Poob = 0
         if i == candy.get():
-            Poob = 1
+            
             print('happy')         
             addInput = candy.get()
             candyList.append(addInput)
@@ -55,8 +59,12 @@ def addReminder():
             new_candy_entry.delete(0,'end')
             new_candy_entry.insert(0,'Please enter in another candy type')
             win.focus()
-        if i == candyTypes[5] and i != candy.get() and i != candy.get() and Poob != 1:
-            messagebox.showerror('Please enter in a valid choice of candy from the choices on the right')
+            print(Poob)
+            Poob = 1
+            print(Poob)
+            print('hello')
+        elif i == candyTypes[5] and i != candy.get() and i != candy.get() and Poob != 1:
+            messagebox.showerror('Error','Please enter in a valid choice of candy from the choices on the right')
             new_candy_entry.delete(0,'end')
             new_candy_entry.insert(0,'Please enter in another candy type')  
             win.focus()
@@ -156,23 +164,68 @@ def provideInfo():
 
 def createNewWindow():
     if candyList == []:
-        messagebox.showerror('Please enter in a type of candy')
+        messagebox.showerror('Error','Please enter in a type of candy')
     else:
         mainFrame.grid_forget()
         candy_information_frame.pack()
         test()
+        win.geometry('1300x1300')
+        win.configure(background='#e86c3f')
 
   
 # -------------------------------------------------------------------->
 # Chase's information/code
 #function for the button picture
-candy_information_frame = tk.Frame(win)
+candy_information_frame = tk.Frame(win,background='#e86c3f')
 candy_information_frame.grid_forget()
+
+def radioFunction():
+    radSel = radVar.get()
+    if radSel ==1:
+        candyCornPhoto.pack(side=RIGHT)
+        twixPhoto.pack_forget()
+        milkyWayPhoto.pack_forget()
+        crunchPhoto.pack_forget()
+        #Add nutriention info
+        candyCornLabel.pack(side=LEFT)
+        twixLabel.pack_forget()
+        milkywayLabel.pack_forget()
+        crunchLabel.pack_forget()
+    if radSel ==2:
+        twixPhoto.pack(side=RIGHT)
+        candyCornPhoto.pack_forget()
+        crunchPhoto.pack_forget()
+        milkyWayPhoto.pack_forget()
+        #Add nutriention info
+        twixLabel.pack(side=LEFT)
+        candyCornLabel.pack_forget()
+        milkywayLabel.pack_forget()
+        crunchLabel.pack_forget()
+    if radSel ==3:
+        milkyWayPhoto.pack(side=RIGHT)
+        candyCornPhoto.pack_forget()
+        twixPhoto.pack_forget()
+        crunchPhoto.pack_forget()
+        #Add nutriention info
+        milkywayLabel.pack(side=LEFT)
+        twixLabel.pack_forget()
+        candyCornLabel.pack_forget()
+        crunchLabel.pack_forget()
+    if radSel ==4:
+        crunchPhoto.pack(side=RIGHT)
+        candyCornPhoto.pack_forget()
+        twixPhoto.pack_forget()
+        milkyWayPhoto.pack_forget()
+        #Add nutriention info
+        crunchLabel.pack(side=LEFT)
+        twixLabel.pack_forget()
+        milkywayLabel.pack_forget()
+        candyCornLabel.pack_forget()
 
 candyEntryLabel = tk.Label(candy_information_frame,text='Please select a candy from the choices below',font = 'Georgia 14',background='#e86c3f')
 candyEntryLabel.pack()
 candyListItems = ''
-interestLabel = tk.Label(candy_information_frame,text='')
+interestLabel = tk.Label(candy_information_frame,text='',background='#e86c3f')
 interestLabel.pack()
 def test():
     global candyListItems
@@ -182,68 +235,88 @@ def test():
         print(candyListItems)
         interestLabel.configure(text='We see you are interested in '+candyListItems)
      
-requestLabel = tk.Label(candy_information_frame,text='Please chose from the choices below to see the nutriental value and images of a similar type of candy to your generic choice chosen')
+requestLabel = tk.Label(candy_information_frame,text='Please chose from the choices below to see the nutriental value and images of a similar type of candy that matches your generic choice chosen',background='#e86c3f')
 requestLabel.pack()
 
 candy_Frame = tk.Frame(candy_information_frame, background = '#e86c3f')
 candy_Frame.pack()
 
-candy_name_label = tk.Label(candy_Frame, text='', font = 'Times 12')
+candy_name_label = tk.Label(candy_Frame, text='', font = 'Times 12',background='#e86c3f')
 candy_name_label.grid(column=1,row =0)
 
-radioFrame = tk.Frame(candy_information_frame)
+radioFrame = tk.Frame(candy_information_frame,background='#e86c3f')
 radioFrame.pack()
 
 radVar = tk.IntVar()
 
-candyCorn = tk.Radiobutton(radioFrame,variable=radVar, text='Chocolate',background='#e86c3f',value=1)
+candyCorn = tk.Radiobutton(radioFrame,variable=radVar, text='Candy Corn',background='#e86c3f',value=1,command=radioFunction)
 candyCorn.pack()
 
 #Chocolate
-twix = tk.Radiobutton(radioFrame,variable=radVar,text='Twix',background='#e86c3f',value=2)
+twix = tk.Radiobutton(radioFrame,variable=radVar,text='Twix',background='#e86c3f',value=2,command=radioFunction)
 twix.pack()
 
-milkyWay = tk.Radiobutton(radioFrame,variable=radVar,text='Milk Way',background='#e86c3f',value=3)
+milkyWay = tk.Radiobutton(radioFrame,variable=radVar,text='Milk Way',background='#e86c3f',value=3,command=radioFunction)
 milkyWay.pack()
 
-crunch = tk.Radiobutton(radioFrame,variable=radVar,text='Crunch',background='#e86c3f',value=4)
+crunch = tk.Radiobutton(radioFrame,variable=radVar,text='Crunch',background='#e86c3f',value=4,command=radioFunction)
 crunch.pack()
 
 #Photo Frame
-candyPhoto = tk.Frame(candy_information_frame)
-candyPhoto.pack()
+candyPhoto = tk.Frame(candy_information_frame,background='#e86c3f')
+candyPhoto.pack(side=RIGHT)
 
 #adding photos of candy
-candycorn_Photo = tk.PhotoImage(file = 'candyCorn.png')
-twix_Photo = tk.PhotoImage(file = 'twix.png')
-milky_way_Photo = tk.PhotoImage(file = 'milkyWay.png')
-crunch_Photo = tk.PhotoImage(file = 'crunch.png')
-jelly_Photo = tk.PhotoImage(file='jellyBeans.png')
+candycorn_Photo = tk.PhotoImage(file = 'Pictures\candyCorn.png')
+twix_Photo = tk.PhotoImage(file='Pictures\goodTwix.png')
+#twix_Photo = PIL_imagetk.PhotoImage(file = 'Pictures\Twix.png')
+#twix_Photo = twix_Photo._PhotoImage__photo.zoom(2)
+milky_way_Photo = tk.PhotoImage(file = 'Pictures\milkyWay.png')
+crunch_Photo = tk.PhotoImage(file = 'Pictures\crunch.png')
+jelly_Photo = tk.PhotoImage(file='Pictures\jellyBeans.png')
 
-candyCornPhoto = tk.Label(candyPhoto,image=candycorn_Photo,width=200,height=200)
+candyCornPhoto = tk.Label(candyPhoto,image=candycorn_Photo,width=300,height=200,background='#e86c3f')
 candyCornPhoto.pack_forget()
 
-twixPhoto = tk.Label(candyPhoto,image=twix_Photo,width=800,height=400)
+twixPhoto = tk.Label(candyPhoto,image=twix_Photo,width=800,height=400,background='#e86c3f')
 candyCornPhoto.pack_forget()
 
-milkWayPhoto = tk.Label(candyPhoto,image=milky_way_Photo,width=800,height=400)
-milkWayPhoto.pack_forget()
+milkyWayPhoto = tk.Label(candyPhoto,image=milky_way_Photo,width=800,height=400,background='#e86c3f')
+milkyWayPhoto.pack_forget()
 
-crunchPhoto = tk.Label(candyPhoto,image=crunch_Photo,width=800,height=400)
+crunchPhoto = tk.Label(candyPhoto,image=crunch_Photo,width=800,height=400,background='#e86c3f')
 crunchPhoto.pack_forget()
 
-jellyPhoto = tk.Label(candyPhoto,image=jelly_Photo,width=200,height=400)
+jellyPhoto = tk.Label(candyPhoto,image=jelly_Photo,width=200,height=400,background='#e86c3f')
 jellyPhoto.pack_forget()
+
 
 #nutrition area
 #nutrition photo
-#twix_nut_Photo = tk.PhotoImage(files = '')
-#milkyway_nut_Photo = tk.PhotoImage(files = '')
-#crunch_nut_Photo = tk.PhotoImage(files = '')
-#candy_corn_Photo = tk.PhotoImage(files = '')
-#nutrition_label=tk.Label(candy_Frame)
+#nutrition frame
+nutrition = tk.Frame(candy_information_frame,background='#e86c3f')
+nutrition.pack(side=LEFT)
 
+twix_nut_Photo = tk.PhotoImage(file = 'Nutrition Info\TwixNutrition.png')
+milkyway_nut_Photo = tk.PhotoImage(file = 'Nutrition Info\milkyWayNutrition.png')
+crunch_nut_Photo = tk.PhotoImage(file = 'Nutrition Info\crunchNutrition.png')
+candy_corn_Photo = tk.PhotoImage(file = 'Nutrition Info\crunchNutrition.png')
+jelly_bean_photo = tk.PhotoImage(file= 'Nutrition Info\candyCornNutrition.png')
 #frame for the lists known
+twixLabel = tk.Label(nutrition,image=twix_nut_Photo,background='#e86c3f')
+twixLabel.pack_forget()
+
+milkywayLabel = tk.Label(nutrition,image=milkyway_nut_Photo,background='#e86c3f')
+milkywayLabel.pack_forget()
+
+crunchLabel = tk.Label(nutrition,image = crunch_nut_Photo,background='#e86c3f')
+crunchLabel.pack_forget()
+
+candyCornLabel = tk.Label(nutrition,image=candy_corn_Photo,background='#e86c3f')
+candyCornLabel.pack_forget()
+
+jellyBeanLabel = tk.Label(nutrition,image=jelly_bean_photo,background='#e86c3f')
+jellyBeanLabel.pack_forget()
 
 #End of Chase's code
 #-------------------------------------------------------------------------->
