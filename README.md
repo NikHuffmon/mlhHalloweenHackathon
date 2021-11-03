@@ -1,18 +1,5 @@
-# halloweenTryTwo
+Building a candy picker and information provider
 
-hello
+MLH Hackathon
 
-
-asdfasdf
-goodbye 
-asdfasdf
-
-adfasdfdfasdf4
-
-asdfasdfasdf
-
-
-
-Test again
-
-
+Date: October 29th - October 31st
